@@ -42,16 +42,16 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """ returns indexed page information """
-        total_data = self.dataset()
-        assert isinstance(index, int) and index < len(total_data)
+        data = self.indexed_dataset()
+        assert index is not None and index >= 0 and index <= max(data.keys())
 
         next_index = index
         page_data = []
-        count = 0
-        while (count < page_size):
+        curr_size = 0
+        while (curr_size < page_size):
             try:
                 page_data.append(self.indexed_dataset()[next_index])
-                count += 1
+                curr_size += 1
             except Exception:
                 pass
             next_index += 1
