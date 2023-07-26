@@ -29,10 +29,9 @@ class LRUCache(BaseCaching):
 
         cache = self.cache_data
         if key not in cache and len(cache) == self.MAX_ITEMS:
-            trckr = self.use_tracker
-            least_used = min(trckr, key=lambda x: trckr[x])
-            del self.cache_data[least_used]
-            del self.use_tracker[least_used]
+            def _key(x): return self.use_tracker[x]
+            least_used = min(self.use_tracker, key=_key)
+            del self.cache_data[least_used], self.use_tracker[least_used]
             print('DISCARD: {}'.format(least_used))
 
         self.cache_data[key] = item
