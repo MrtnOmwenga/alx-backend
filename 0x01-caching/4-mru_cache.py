@@ -29,7 +29,7 @@ class MRUCache(BaseCaching):
 
         cache = self.cache_data
         if key not in cache and len(cache) == self.MAX_ITEMS:
-            _key = lambda x: self.use_tracker[x]
+            def _key(x): return self.use_tracker[x]
             least_used = max(self.use_tracker, key=_key)
             del self.cache_data[least_used],  self.use_tracker[least_used]
             print('DISCARD: {}'.format(least_used))
