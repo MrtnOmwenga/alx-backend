@@ -22,7 +22,7 @@ babel = Babel(app)
 @app.route("/")
 def hello() -> str:
     """ Base route for application """
-    return render_template('0-index.html')
+    return render_template('1-index.html')
 
 
 if __name__ == "__main__":
